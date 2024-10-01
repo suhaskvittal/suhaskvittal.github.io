@@ -6,7 +6,7 @@ subtitle: <a href='#'> Georgia Institute of Technology </a>.
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: headshot.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
 
@@ -21,3 +21,6 @@ of fault-tolerant quantum computation, which is projected to require tens of
 millions of qubits. If we could reduce these overheads by 10x (or more!), then
 useful quantum advantage could be achieved within the next 10 years, as opposed
 when I start getting gray hairs.
+
+My research has been published in top-tier computer architecture conferences
+(ISCA, MICRO, HPCA, ASPLOS). Below is a truncated list of my lead-author papers.
