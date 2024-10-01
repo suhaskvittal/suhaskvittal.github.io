@@ -1,115 +1,113 @@
 ---
 ---
-
-@string{aps = {American Physical Society,}}
-
-@book{einstein1920relativity,
-  title={Relativity: the Special and General Theory},
-  author={Einstein, Albert},
-  year={1920},
-  publisher={Methuen & Co Ltd},
-  html={relativity.html}
+@inproceedings{hua2023caqr, 
+    abbr={ASPLOS},
+    author = {Hua, Fei and Jin, Yuwei and Chen, Yanhao and Vittal, Suhas and Krsulich, Kevin and Bishop, Lev S. and Lapeyre, John and Javadi-Abhari, Ali and Zhang, Eddy Z.},
+    title = {CaQR: A Compiler-Assisted Approach for Qubit Reuse through Dynamic Circuit},
+    year = {2023},
+    isbn = {9781450399180},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3582016.3582030},
+    doi = {10.1145/3582016.3582030},
+    abstract = {Quantum measurement is important to quantum computing as it extracts out the outcome of the circuit at the end of the computation. Previously, all measurements have to be done at the end of the circuit. Otherwise, it will incur significant errors. But it is not the case now. Recently IBM starts supporting dynamic circuit through hardware (instead of software by simulator). With mid-circuit hardware measurement, we can improve circuit efficacy and fidelity from three aspects: (a) reduced qubit usage, (b) reduced swap insertion, and (c) improved fidelity. We demonstrate this using real-world applications Bernstein Verizani on real hardware and show that circuit resource usage can be improved by 60\%, and circuit fidelity can be improved by 15\%. We design a compiler-assisted tool that can find and exploit the tradeoff between qubit reuse, fidelity, gate count, and circuit duration. We also developed a method for identifying whether qubit reuse will be beneficial for a given application. We evaluated our method on a representative set of important applications. We can reduce resource usage by up to 80\% and improve circuit fidelity by up to 20\%.}, 
+    booktitle = {Proceedings of the 28th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 3}, 
+    pages = {59–71},
+    numpages = {13},
+    keywords = {qubit usage, qubit reuse, mid-circuit measurement, circuit fidelity},
+    location = {Vancouver, BC, Canada}, series = {ASPLOS 2023} 
 }
 
-@book{einstein1956investigations,
+@inproceedings{vittal2023astrea,
+    abbr={ISCA},
+    bibtex_show={true},
+    author = {Vittal, Suhas and Das, Poulami and Qureshi, Moinuddin},
+    title = {Astrea: Accurate Quantum Error-Decoding via Practical Minimum-Weight Perfect-Matching},
+    year = {2023},
+    isbn = {9798400700958},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3579371.3589037},
+    doi = {10.1145/3579371.3589037},
+    abstract = {Quantum devices suffer from high error rates, which makes them ineffective for running practical applications. Quantum computers can be made fault tolerant using Quantum Error Correction (QEC), which protects quantum information by encoding logical qubits using data qubits and parity qubits. The data qubits collectively store the quantum information and the parity qubits are measured periodically to produce a syndrome, which is decoded by a classical decoder to identify the location and type of errors. To prevent errors from accumulating and causing a logical error, decoders must accurately identify errors in real-time, necessitating the use of hardware solutions because software decoders are slow. Ideally, a real-time decoder must match the performance of the Minimum-Weight Perfect Matching (MWPM) decoder. However, due to the complexity of the underlying Blossom algorithm, state-of-the-art real-time decoders either use lookup tables, which are not scalable, or use approximate decoding, which significantly increases logical error rates.In this paper, we leverage two key insights to enable practical real-time MWPM decoding. First, for near-term implementations (with redundancies up to distance d = 7) of surface codes, the Hamming weight of the syndromes tends to be quite small (less than or equal to 10). For this regime, we propose Astrea, which simply performs a brute-force search for the few hundred possible options to perform accurate decoding within a few nanoseconds (1ns average, 456ns worst-case), thus representing the first decoder to be able to do MWPM in real-time up-to distance 7. Second, even for codes that produce syndromes with higher Hamming weights (e.g. d = 9) the search for optimal pairings can be made more efficient by simply discarding the weights that denote significantly lower probability than the logical error-rate of the code. For this regime, we propose a greedy design called Astrea-G, which filters high-cost weights and reorders the search from high-likelihood pairings to low-likelihood pairings to produce the most likely decoding within 1μs (average 450ns). Our evaluations show that Astrea-G provides similar logical error-rates as the software-based MWPM for up-to d = 9 codes while meeting the real-time decoding latency constraints.},
+    booktitle = {Proceedings of the 50th Annual International Symposium on Computer Architecture},
+    articleno = {2},
+    numpages = {16},
+    keywords = {quantum error correction, error decoding, real-time decoding},
+    location = {Orlando, FL, USA},
+    series = {ISCA '23}
+}
+
+@inproceedings{vittal2023eraser,
+    abbr={MICRO},
+    bibtex_show={true},
+    author = {Vittal, Suhas and Das, Poulami and Qureshi, Moinuddin},
+    title = {ERASER: Towards Adaptive Leakage Suppression for Fault-Tolerant Quantum Computing},
+    year = {2023},
+    isbn = {9798400703294},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3613424.3614251},
+    doi = {10.1145/3613424.3614251},
+    abstract = {Quantum error correction (QEC) codes can tolerate hardware
+        errors by encoding fault-tolerant logical qubits using redundant
+            physical qubits and detecting errors using parity checks. Leakage
+            errors occur in quantum systems when a qubit leaves its
+            computational basis and enters higher energy states. These errors
+            severely limit the performance of QEC due to two reasons. First,
+        they lead to erroneous parity checks that obfuscate the accurate
+            detection of errors. Second, the leakage spreads to other qubits and
+            creates a pathway for more errors over time. Prior works tolerate
+            leakage errors by using leakage reduction circuits (LRCs) that
+            modify the parity check circuitry of QEC codes. Unfortunately,
+        naively using LRCs always throughout a program is sub-optimal because
+            LRCs incur additional two-qubit operations that (1) facilitate
+            leakage transport, and (2) as new sources of errors.
+            Ideally, LRCs should only be used if leakage occurs, so that errors
+            from both leakage as well as additional LRC operations are
+            simultaneously minimized. However, identifying leakage errors in
+            real-time is challenging. To enable the robust and efficient usage
+            of LRCs, we propose ERASER that speculates the subset of qubits that
+            may have leaked and only uses LRCs for those qubits. Our studies
+            show that the majority of leakage errors typically impact the parity
+            checks. We leverage this insight to identify the leaked qubits by
+            analyzing the patterns in the failed parity checks. We propose
+            ERASER+M that enhances ERASER by detecting leakage more accurately
+            using qubit measurement protocols that can classify qubits into |0⟩,
+        |1⟩ and |L⟩ states. ERASER and ERASER+M improve the logical error rate
+            by up to 4.3x and 23x respectively compared to always using LRC.},
+    booktitle = {Proceedings of the 56th Annual IEEE/ACM International Symposium on Microarchitecture},
+    pages = {509–525},
+    numpages = {17},
+    keywords = {Quantum Error Correction, Leakage Suppression},
+    location = {Toronto, ON, Canada},
+    series = {MICRO '23}
+}
+
+@inproceedings{alavisamani2024promatch,
+    abbr={ASPLOS},
+    author = {Alavisamani, Narges and Vittal, Suhas and Ayanzadeh, Ramin and Das, Poulami and Qureshi, Moinuddin},
+    title = {Promatch: Extending the Reach of Real-Time Quantum Error Correction with Adaptive Predecoding},
+    year = {2024},
+    isbn = {9798400703867},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3620666.3651339},
+    doi = {10.1145/3620666.3651339},
+    abstract = {Fault-tolerant quantum computing relies on Quantum Error Correction (QEC), which encodes logical qubits into data and parity qubits. Error decoding is the process of translating the measured parity bits into types and locations of errors. To prevent a backlog of errors, error decoding must be performed in real-time (i.e., within 1μs on superconducting machines). Minimum Weight Perfect Matching (MWPM) is an accurate decoding algorithm for surface code, and recent research has demonstrated real-time implementations of MWPM (RT-MWPM) for a distance of up to 9. Unfortunately, beyond d=9, the number of flipped parity bits in the syndrome, referred to as the Hamming weight of the syndrome, exceeds the capabilities of existing RT-MWPM decoders. In this work, our goal is to enable larger distance RT-MWPM decoders by using adaptive predecoding that converts high Hamming weight syndromes into low Hamming weight syndromes, which are accurately decoded by the RT-MWPM decoder.An effective predecoder must balance both accuracy (as any erroneous decoding by the predecoder contributes to the overall Logical Error Rate, termed as LER) and coverage (as the predecoder must ensure that the hamming weight of the syndrome is within the capability of the final decoder). In this paper, we propose Promatch, a real-time adaptive predecoder that predecodes both simple and complex patterns using a locality-aware, greedy approach. Our approach ensures two crucial factors: 1) high accuracy in prematching flipped bits, ensuring that the decoding accuracy is not hampered by the predecoder, and 2) enough coverage adjusted based on the main decoder's capability given the time constraints. Promatch represents the first real-time decoding framework capable of decoding surface codes of distances 11 and 13, achieving an LER of 2.6 \texttimes{} 10-14 for distance 13. Moreover, we demonstrate that running Promatch concurrently with the recently proposed Astrea-G achieves LER equivalent to MWPM LER, 3.4 \texttimes{} 10-15, for distance 13, representing the first real-time accurate decoder for up-to a distance of 13.},
+    booktitle = {Proceedings of the 29th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 3},
+    pages = {818–833},
+    numpages = {16},
+    location = {La Jolla, CA, USA},
+    series = {ASPLOS '24}
+}
+
+@inproceedings{vittal2024fpn,
+  abbr={MICRO},
   bibtex_show={true},
-  title={Investigations on the Theory of the Brownian Movement},
-  author={Einstein, Albert},
-  year={1956},
-  publisher={Courier Corporation},
-  preview={brownian-motion.gif}
+  title={Flag Proxy Networks: Tackling the Architectural, Scheduling, and Decoding Obstacles of Quantum LDPC codes},
+  author={Vittal, Suhas and Javadi-Abhari, Ali and Cross, Andrew W and Bishop, Lev S and Qureshi, Moinuddin},
+  booktitle={Proceedings of the 57th Annual IEEE/ACM International Symposium on Microarchitecture},
+  year={2024}
 }
 
-@article{einstein1950meaning,
-  abbr={AJP},
-  bibtex_show={true},
-  title={The meaning of relativity},
-  author={Einstein, Albert and Taub, AH},
-  journal={American Journal of Physics},
-  volume={18},
-  number={6},
-  pages={403--404},
-  year={1950},
-  publisher={American Association of Physics Teachers}
-}
-
-@article{PhysRev.47.777,
-  abbr={PhysRev},
-  title={Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?},
-  author={Einstein*†, A. and Podolsky*, B. and Rosen*, N.},
-  abstract={In a complete theory there is an element corresponding to each element of reality. A sufficient condition for the reality of a physical quantity is the possibility of predicting it with certainty, without disturbing the system. In quantum mechanics in the case of two physical quantities described by non-commuting operators, the knowledge of one precludes the knowledge of the other. Then either (1) the description of reality given by the wave function in quantum mechanics is not complete or (2) these two quantities cannot have simultaneous reality. Consideration of the problem of making predictions concerning a system on the basis of measurements made on another system that had previously interacted with it leads to the result that if (1) is false then (2) is also false. One is thus led to conclude that the description of reality as given by a wave function is not complete.},
-  journal={Phys. Rev.},
-  location={New Jersey},
-  volume={47},
-  issue={10},
-  pages={777--780},
-  numpages={0},
-  year={1935},
-  month={May},
-  publisher=aps,
-  doi={10.1103/PhysRev.47.777},
-  url={http://link.aps.org/doi/10.1103/PhysRev.47.777},
-  html={https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777},
-  pdf={example_pdf.pdf},
-  altmetric={248277},
-  dimensions={true},
-  google_scholar_id={qyhmnyLat1gC},
-  video={https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ},
-  additional_info={. *More Information* can be [found here](https://github.com/alshedivat/al-folio/)},
-  annotation={* Example use of superscripts<br>† Albert Einstein},
-  selected={true},
-  inspirehep_id = {3255}
-}
-
-@article{einstein1905molekularkinetischen,
-  title={{\"U}ber die von der molekularkinetischen Theorie der W{\"a}rme geforderte Bewegung von in ruhenden Fl{\"u}ssigkeiten suspendierten Teilchen},
-  author={Einstein, A.},
-  journal={Annalen der physik},
-  volume={322},
-  number={8},
-  pages={549--560},
-  year={1905},
-  publisher={Wiley Online Library}
-}
-
-@article{einstein1905movement,
-  abbr={Ann. Phys.},
-  title={Un the movement of small particles suspended in statiunary liquids required by the molecular-kinetic theory 0f heat},
-  author={Einstein, A.},
-  journal={Ann. Phys.},
-  volume={17},
-  pages={549--560},
-  year={1905}
-}
-
-@article{einstein1905electrodynamics,
-  title={On the electrodynamics of moving bodies},
-  author={Einstein, A.},
-  year={1905}
-}
-
-@Article{einstein1905photoelectriceffect,
-  bibtex_show={true},
-  abbr={Ann. Phys.},
-  title="{{\"U}ber einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt}",
-  author={Albert Einstein},
-  abstract={This is the abstract text.},
-  journal={Ann. Phys.},
-  volume={322},
-  number={6},
-  pages={132--148},
-  year={1905},
-  doi={10.1002/andp.19053220607},
-  award={Albert Einstein receveid the **Nobel Prize in Physics** 1921 *for his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect*},
-  award_name={Nobel Prize}
-}
-
-@book{przibram1967letters,
-  bibtex_show={true},
-  title={Letters on wave mechanics},
-  author={Einstein, Albert and Schrödinger, Erwin and Planck, Max and Lorentz, Hendrik Antoon and Przibram, Karl},
-  year={1967},
-  publisher={Vision},
-  preview={wave-mechanics.gif},
-  abbr={Vision}
-}
